@@ -23,7 +23,7 @@ import { Readable } from 'stream';
 import { Rules } from '@gitroom/nestjs-libraries/chat/rules.description.decorator';
 
 @Rules(
-  'LinkedIn can have maximum one attachment when selecting video, when choosing a carousel on LinkedIn minimum amount of attachment must be two, and only pictures, if uploading a video, LinkedIn can have only one attachment'
+  'LinkedIn can have maximum one attachment when selecting video, when choosing a carousel on LinkedIn minimum amount of attachment must be two, and only pictures, if uploading a video, LinkedIn c[...]'
 )
 export class LinkedinProvider extends SocialAbstract implements SocialProvider {
   identifier = 'linkedin';
@@ -35,7 +35,6 @@ export class LinkedinProvider extends SocialAbstract implements SocialProvider {
     'openid',
     'profile',
     'w_member_social',
-    'r_basicprofile',
     'rw_organization_admin',
     'w_organization_social',
     'r_organization_social',
@@ -229,7 +228,7 @@ export class LinkedinProvider extends SocialAbstract implements SocialProvider {
   async company(token: string, data: { url: string }) {
     const { url } = data;
     const getCompanyVanity = url.match(
-      /^https?:\/\/(?:www\.)?linkedin\.com\/company\/([^/]+)\/?$/
+      /^https?:\/\/(?:www\.)?linkedin\.com\/company\/([^\/]+)\/?$/
     );
     if (!getCompanyVanity || !getCompanyVanity?.length) {
       throw new Error('Invalid LinkedIn company URL');
@@ -476,7 +475,7 @@ export class LinkedinProvider extends SocialAbstract implements SocialProvider {
   }
 
   protected fixText(text: string) {
-    const pattern = /@\[.+?]\(urn:li:organization.+?\)/g;
+    const pattern = /@\[.+?\](urn:li:organization.+?\)/g;
     const matches = text.match(pattern) || [];
     const splitAll = text.split(pattern);
     const splitTextReformat = splitAll.map((p) => {
